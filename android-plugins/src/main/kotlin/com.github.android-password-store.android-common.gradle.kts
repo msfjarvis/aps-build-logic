@@ -5,7 +5,6 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.android.build.gradle.TestedExtension
-import flavors.configureSlimTests
 
 extensions.configure<TestedExtension> {
   setCompileSdkVersion(31)
@@ -38,6 +37,4 @@ extensions.configure<TestedExtension> {
     animationsDisabled = true
     unitTests.isReturnDefaultValues = true
   }
-
-  configureSlimTests()
 }

@@ -4,21 +4,11 @@
  */
 @file:Suppress("UnstableApiUsage")
 
-import flavors.FlavorDimensions
-import flavors.ProductFlavors
 import signing.configureBuildSigning
 
 plugins {
   id("com.android.application")
   id("com.github.android-password-store.android-common")
-}
-
-fun Project.isSnapshot(): Boolean {
-  with(project.providers) {
-    val workflow = environmentVariable("GITHUB_WORKFLOW")
-    val snapshot = environmentVariable("SNAPSHOT")
-    return workflow.isPresent || snapshot.isPresent
-  }
 }
 
 android {
@@ -46,20 +36,12 @@ android {
           "proguard-rules-missing-classes.pro",
         )
       )
-      buildConfigField("boolean", "ENABLE_DEBUG_FEATURES", "${project.isSnapshot()}")
     }
     named("debug") {
       applicationIdSuffix = ".debug"
       versionNameSuffix = "-debug"
       isMinifyEnabled = false
-      buildConfigField("boolean", "ENABLE_DEBUG_FEATURES", "true")
     }
-  }
-
-  flavorDimensions.add(FlavorDimensions.FREE)
-  productFlavors {
-    register(ProductFlavors.FREE) {}
-    register(ProductFlavors.NON_FREE) {}
   }
 
   project.configureBuildSigning()
