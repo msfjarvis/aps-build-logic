@@ -6,6 +6,16 @@
 
 rootProject.name = "build-logic"
 
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  plugins {
+    id("com.vanniktech.maven.publish.base") version "0.19.0"
+  }
+}
+
 dependencyResolutionManagement {
   repositories {
     google()
